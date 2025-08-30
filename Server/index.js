@@ -47,7 +47,7 @@ app.post("/create", (req,res) => {
                 return res.status(500).json({error: err.message})
             }
 
-            res.status(200).json({id: result.row[0].id, description: task.description})
+            res.status(200).json({id: result.rows[0].id, description: task.description})
         }
     )
 })

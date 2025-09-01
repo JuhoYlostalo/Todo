@@ -29,5 +29,5 @@ dist-ssr
 
 #server
 
-/server/node_modules
-/server/.env
+/Server/node_modules
+/Server/.env

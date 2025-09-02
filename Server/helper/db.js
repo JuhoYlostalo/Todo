@@ -20,5 +20,4 @@ const openDb = () => {
 }
 
 const pool = openDb()
-console.log(pool)
 export {pool}

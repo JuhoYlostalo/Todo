@@ -68,7 +68,7 @@ describe("Testing user management", () => {
     })
     
     const newUser = {email:"foo@test.com", password: "password123"}
-    it("should sing up", async() => { 
+    it("should sign up", async() => { 
 
         const response = await fetch("http://localhost:3001/user/signup", {
             method: "post",

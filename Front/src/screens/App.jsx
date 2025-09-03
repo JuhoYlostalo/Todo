@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import axios, { all } from 'axios'
-import './App.css'
-import Row from '../components/Row'
+import axios from 'axios'
+import '../App.css'
+import Row from '../components/Row.jsx'
 import { useEffect } from 'react'
+import { useUser } from '../context/useUser.jsx'
 
 const url = "http://localhost:3001"
 
@@ -11,6 +12,7 @@ function App() {
 
   const [task,setTask] = useState("")
   const [tasks, setTasks] = useState([])
+  const {user}=useUser()
 
   useEffect(() => {
     axios.get(url).then(response => {
@@ -22,9 +24,10 @@ function App() {
   },[])
 
   const addTask = () => {
+    const headers = {headers: {Authorization: user.token}}
     const newTask = {description: task}
 
-    axios.post(url + "/create", {task: newTask}).then(response => {
+    axios.post(url + "/create", {task: newTask},headers).then(response => {
       setTasks([...tasks,response.data])
       setTask("")
     }).catch(error => {
@@ -33,7 +36,9 @@ function App() {
   }
 
   const deleteTask = (deleteItem) => {
-    axios.delete(url + "/delete/" + deleteItem).then(response => {
+    const headers = {headers: {Authorization: user.token}}
+    console.log(headers)
+    axios.delete(url + "/delete/" + deleteItem,headers).then(response => {
       setTasks(tasks.filter(item => item.id !== deleteItem))
     }).catch(error => {
       alert(error.response ? error.response.data.error.message : error)

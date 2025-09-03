@@ -5,6 +5,7 @@
 ### dotenv ###
 .env
 /Server/.env
+/Front/.env
 
 
 ### Node ###

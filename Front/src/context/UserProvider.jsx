@@ -2,16 +2,24 @@ import { useState } from "react";
 import { UserContext } from "./UserContext.jsx";
 import axios from "axios";
 
-
+//Tämä komponenti välittää kaikki user tiedot muille
 export default function UserProvider({children}) {
+
+    //Haetaan selaimen muistista käyttäjänimi
     const userFromStorage = sessionStorage.getItem("user")
+
     const [user, setUser] = useState(userFromStorage ? JSON.parse(userFromStorage) : {email: "", password: ""
     })
 
     const signUp = async(email,password) => {
+
         const headers = {headers: {"Content-Type" : "application/json"}}
+
+        //axiosin pitäisi osata itse stringifytä joten tämä turhaa
         await axios.post(`${import.meta.env.VITE_API_URL}/user/signup`, JSON.stringify({email, password}), headers)
-        setUser({email })
+
+        //Tässä ei sinänsä ole järkeä koska tämän jälkeen käyttäjä ohjataan heti kirjautumis sivulle
+        setUser({ email })
     }
 
     const signIn = async (email,password) => {

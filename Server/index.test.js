@@ -54,8 +54,8 @@ describe("Testing basic database functionality", () => {
           body: JSON.stringify({task: null})  
         })
         const data = await response.json()
-        expect(response.status).to.equal(400)
-        expect(data).to.include.all.keys("err")
+        expect(response.status).to.equal(401)
+        expect(data).to.include.all.keys("message")
     })
 
 })
@@ -73,7 +73,7 @@ describe("Testing user management", () => {
         const response = await fetch("http://localhost:3001/user/signup", {
             method: "post",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({user: newUser})
+            body: JSON.stringify(newUser)
         })
         const data = await response.json()
         expect(response.status).to.equal(201)
@@ -85,7 +85,7 @@ describe("Testing user management", () => {
         const response = await fetch("http://localhost:3001/user/signin", {
             method: "post",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         })
          const data = await response.json()
         expect(response.status).to.equal(200)

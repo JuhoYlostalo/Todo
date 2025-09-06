@@ -24,7 +24,14 @@ export default function Authentication({authenticationMode}){
         const signFunction = authenticationMode === AuthenticationMode.SignUp ? signUp : signIn
 
         signFunction(user.email, user.password).then(() => {
-            navigate(authenticationMode === AuthenticationMode.SignUp ? "/signin" : "/")
+            if (authenticationMode === AuthenticationMode.SignUp){
+                setUser({email:"",password: ""})
+                navigate("/signin")
+            }
+            else {
+                navigate("/")
+            }
+
         })
         .catch(error => {
             alert(error)
@@ -32,7 +39,7 @@ export default function Authentication({authenticationMode}){
     }
 
     return (
-        <div>
+        <div className="auth-container">
             <h3>{authenticationMode === AuthenticationMode.SignIn ? "Sign in" : "Sign up"}</h3>
             <form onSubmit={handleSubmit}>
                 <label>Email</label>
@@ -40,7 +47,7 @@ export default function Authentication({authenticationMode}){
                 <label>Password</label>
                 <input placeholder="Password" type="password" value={user.password} onChange={e => setUser({...user,password: e.target.value})} />
                 <button type="submit">{authenticationMode === AuthenticationMode.SignIn ? "Login":"Submit"}</button>
-                <Link to={authenticationMode === AuthenticationMode.SignIn ? "/signup": "/signin"}>
+                <Link to={authenticationMode === AuthenticationMode.SignIn ? "/signup": "/signin"} onClick={() =>setUser({...user,email: "",password:""})}>
                     {authenticationMode === AuthenticationMode.SignIn ? "No account? Sign Up" : "Already have an account? Sign in"}
                 </Link>
             </form>

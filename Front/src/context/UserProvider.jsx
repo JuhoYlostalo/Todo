@@ -15,7 +15,7 @@ export default function UserProvider({children}) {
 
         const headers = {headers: {"Content-Type" : "application/json"}}
 
-        //axiosin pitäisi osata itse stringifytä joten tämä turhaa
+        //axiosin pitäisi osata itse stringifytä joten tämä saattaa olla turhaa
         await axios.post(`${import.meta.env.VITE_API_URL}/user/signup`, JSON.stringify({email, password}), headers)
 
         //Tässä ei sinänsä ole järkeä koska tämän jälkeen käyttäjä ohjataan heti kirjautumis sivulle

@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './authentication.css'
 import App from './screens/App.jsx'
 import Authentication, {AuthenticationMode} from './screens/Authentication.jsx'
 import ProtectedRoute from "./components/ProtectedRouter.jsx"
